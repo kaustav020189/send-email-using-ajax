@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Send Mail using AJAX and JQuery  | A 100 Web Solutions</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <link rel="shortcut icon" href="http://www.a100websolutions.in/favicon.ico" />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <h1>Fill in the form and hit the button !</h1>
+        <div class="main">
+            <p>
+            <label>Enter your name</label><br />
+            <input type="text" name="n" id="n" class="text" />
+            </p>
+            <p>
+            <label>Enter the recipient's mail id</label><br />
+            <input type="email" name="e" id="e" class="text" />
+            </p>
+            <p>
+            <label>Enter the message</label><br />
+            <input type="text" name="m" id="m" class="text" />
+            </p>
+            <p>
+                <input type="submit" name="s" id="s" class="button" />
+            </p>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $('#s').click(function(){
+                    $('.main').children().slideUp('fast',function(){
+                        // Fetching the data
+                        var name = $('#n').val();
+                        var email = $('#e').val();
+                        var message = $('#m').val();
+                        
+                        // Sending wait message to the screen
+                        $('.main').html('<h2>Please wait...</h2>');
+                      
+                        // Calling Email Script in PHP file
+                        $.post('sendemail.php',{name:name,email:email,message:message},function(value){
+                           $('.main').html('<h2>'+value+'</h2>'); // writing return message to the screen 
+                        });
+                    })
+                });
+            });
+        </script>
+    </body>
+</html>
